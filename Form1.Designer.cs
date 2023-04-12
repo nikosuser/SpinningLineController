@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.connectButton = new System.Windows.Forms.Button();
             this.windingButton = new System.Windows.Forms.Button();
             this.speed = new System.Windows.Forms.TextBox();
@@ -159,6 +159,7 @@
             this.diameter.Name = "diameter";
             this.diameter.Size = new System.Drawing.Size(100, 20);
             this.diameter.TabIndex = 4;
+            this.diameter.TextChanged += new System.EventHandler(this.diameter_TextChanged);
             // 
             // label4
             // 
@@ -221,16 +222,16 @@
             // 
             // runningChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.runningChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.runningChart.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.runningChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.runningChart.Legends.Add(legend1);
             this.runningChart.Location = new System.Drawing.Point(329, 49);
             this.runningChart.Name = "runningChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Speed";
-            this.runningChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Speed";
+            this.runningChart.Series.Add(series1);
             this.runningChart.Size = new System.Drawing.Size(459, 243);
             this.runningChart.TabIndex = 7;
             this.runningChart.Click += new System.EventHandler(this.runningChart_Click);

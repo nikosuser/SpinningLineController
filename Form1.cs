@@ -37,7 +37,7 @@ namespace ControlNew
         bool directionSwitchValue;
         string connectedCOMvalue;
         float liveSpeed;
-        bool isDisconnect = false;
+        bool isDisconnect = true;
 
         Chart DataChart = new Chart();
         Series winderSpeed = new Series();
@@ -162,7 +162,7 @@ namespace ControlNew
             if (!isConnected)
             {
                 connectToArduino();
-                isDisconnect = false;
+                isDisconnect = true;
                 //updateData();
                 statusLabel.Text = "Connected to Arduino";
                 statusLabel.BackColor = Color.Green;
@@ -175,7 +175,7 @@ namespace ControlNew
                 RPMvalue = 0;
                 stepperSpeedValue = 0;
                 currentWinderPower = 0;
-                isDisconnect = true;
+                isDisconnect = false;
 
                 updateData();
                 windingButton.Text = "Start Spinning";
@@ -231,16 +231,17 @@ namespace ControlNew
 
         }
 
-        private void parseFloat(TextBox TextBox, float output)
+        private float parseFloat(TextBox TextBox)
         {
             if (float.TryParse(TextBox.Text, out stringConversion))
             {
-                output = stringConversion;
+                return stringConversion;
             }
             else
             {
                 statusLabel.Text = "ERROR: One or more input values cannot be parsed, make sure all of them are float or integer numbers.";
                 statusLabel.BackColor = Color.Red;
+                return 0;
             }
         }
 
@@ -317,11 +318,7 @@ namespace ControlNew
 
         public void updateData()
         {
-            parseFloat(speed, windingSpeed);
-            parseFloat(diameter, bobbinDiameter);
-            parseFloat(spacing, fiberSpacing);
-
-            string sendData = windingSpeed + "," + bobbinDiameter + "," + fiberSpacing + "," + ReverseTurning.Checked.ToString() + "," + isRunning.ToString() + "," + (!isDisconnect).ToString() + ",";
+            string sendData = parseFloat(speed) + "," + parseFloat(diameter) + "," + parseFloat(spacing) + "," + ReverseTurning.Checked.ToString() + "," + isRunning.ToString() + "," + isDisconnect.ToString() + ",";
             port.WriteLine(sendData);
         }
 
@@ -395,6 +392,11 @@ namespace ControlNew
         }
 
         private void speed_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void diameter_TextChanged(object sender, EventArgs e)
         {
 
         }
