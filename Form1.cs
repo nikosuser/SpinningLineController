@@ -39,6 +39,8 @@ namespace ControlNew
         float liveSpeed;
         bool isDisconnect = true;
 
+        string receivedData=null;
+
         Chart DataChart = new Chart();
         Series winderSpeed = new Series();
 
@@ -66,8 +68,8 @@ namespace ControlNew
             {
                 try
                 {
-                    string receivedData = port.ReadLine();
-                    logData.Add(DateTime.Now.ToString("HH:mm:ss") + "," + receivedData);
+                    receivedData = port.ReadLine();
+                    //logData.Add(DateTime.Now.ToString("HH:mm:ss") + "," + receivedData);
                     string[] values = receivedData.Split(',');
                     currentWinderPower = float.Parse(values[0]);
                     microstepValue = float.Parse(values[1]);
@@ -205,6 +207,11 @@ namespace ControlNew
                 winderPowerLabel.Text = currentWinderPower.ToString();
                 connectedCOMLabel.Text = connectedCOMvalue.ToString();
             }
+
+            if (receivedData != null)
+            {
+                logData.Add(DateTime.Now.ToString("HH:mm:ss") + "," + receivedData);
+            }
         }
 
         private void windingButton_Click(object sender, EventArgs e)
@@ -305,7 +312,7 @@ namespace ControlNew
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            logData.Add(port.ReadLine());
+
         }
 
         private void button1_Click(object sender, EventArgs e)
